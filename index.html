@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Darkmode in 5 minutes or less</title>
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+		body{
+			font-family: -apple-system, 'Inter', sans-serif;
+		}
+a{
+	position: absolute;
+	bottom: 5%;
+	left: 5%;
+	padding: 10px;
+	background: var(--card-bg);
+	color: var(--text-color);
+	text-decoration: none;
+	text-transform: uppercase;
+	font-weight: bolder;
+}
+
+:root{
+  --body-bg: #f5f5f5;
+  --card-bg: #e0e0e0;
+  --card-bd-col: #bdbdbd;
+  --text-color:#252525;
+}
+.dark_mode{
+  --body-bg: #252525;
+  --card-bg: #555;
+  --card-bd-col: #212121;
+  --text-color:#f5f5f5;
+}
+body{
+  margin: 0;
+  background: var(--body-bg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+.card{
+  padding: 20px;
+  background: var(--card-bg);
+  box-shadow: 5px 5px 10px -3px rgba(0,0,0,.3);
+  border: 1px solid var(--card-bd-col);
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.card>h2{
+  color: var(--text-color);
+}
+
+#theme_toggler{
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  background: #0096c3;
+  padding: 20px;
+  border-radius:30px;
+  color: #fff;
+  cursor: pointer;
+}
+	</style>
+</head>
+<body>
+<div class="card"><h2>Hello! this is a dark theme!</h2></div>
+
+<span id="theme_toggler">
+  Change theme
+</span>
+<a href="https://codedgar.me/blog/how-to-create-a-dark-theme-system-in-5-minutes-or-less-with-vanilla-js" target="_blank">Learn how to do this!</a>
+</body>
+<script type="text/javascript">
+let theme_toggler = document.querySelector('#theme_toggler');
+
+theme_toggler.addEventListener('click', function(){ 
+    document.body.classList.toggle('dark_mode');
+  if(document.body.classList.contains('dark_mode')){
+ localStorage.setItem('website_theme','dark_mode');
+  }else{
+    localStorage.setItem('website_theme','default');
+  }
+});
+
+function retrieve_theme(){
+  var theme = localStorage.getItem('website_theme');
+  if(theme != null){
+ document.body.classList.remove('default', 'dark_mode'); document.body.classList.add(theme);
+  }
+}
+
+
+window.addEventListener("storage",function(){
+retrieve_theme();
+},false);
+</script>
+</html>
